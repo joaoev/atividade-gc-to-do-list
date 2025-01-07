@@ -11,7 +11,12 @@ export const TaskForm: React.FC<Props> = ({ onTaskAdded }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      await api.post('/tasks', { title });
+      try {
+        await api.post('/tasks', { title });
+      } catch (error) {
+        console.error('Falha ao adicionar tarefa: ', error);
+        alert('Falha ao adicionar tarefa.');
+      }
       setTitle('');
       onTaskAdded();
     }
@@ -23,9 +28,9 @@ export const TaskForm: React.FC<Props> = ({ onTaskAdded }) => {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Add a new task"
+        placeholder="Digite o que você precisa fazer..."
       />
-      <button type="submit">Add Task</button>
+      <button type="submit">+</button>
     </form>
   );
 };

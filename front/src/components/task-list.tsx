@@ -45,7 +45,7 @@ export const TaskList: React.FC = () => {
               onChange={() => toggleTask(task._id, !task.completed)}
             />
             {task.title}
-            <button onClick={() => deleteTask(task._id)}>Delete</button>
+            <button onClick={() => deleteTask(task._id)}>X</button>
           </li>
         ))}
       </ul>
