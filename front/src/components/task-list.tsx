@@ -7,12 +7,17 @@ type Task = {
   completed: boolean;
 };
 
-const TaskList: React.FC = () => {
+export const TaskList: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const fetchTasks = async () => {
-    const response = await api.get('/tasks');
-    setTasks(response.data as Task[]);
+    const response = await api.get('/tasks', {
+      headers: {
+      'Accept': 'application/json'
+      }
+    });
+    console.log("RESPONSE: ", response.data);
+    setTasks(Array.isArray(response.data) ? response.data as Task[] : []);
   };
 
   const toggleTask = async (id: string, completed: boolean) => {
@@ -48,4 +53,3 @@ const TaskList: React.FC = () => {
   );
 };
 
-export default TaskList;

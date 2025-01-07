@@ -30,4 +30,3 @@ export const TaskForm: React.FC<Props> = ({ onTaskAdded }) => {
   );
 };
 
-export default TaskForm;
